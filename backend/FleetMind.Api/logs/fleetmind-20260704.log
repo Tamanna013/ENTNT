@@ -1,0 +1,8 @@
+2026-07-04 17:44:36.015 +05:30 [INF] FleetMind AI API starting. Target database: FleetMindDb
+2026-07-04 17:44:36.241 +05:30 [INF] Now listening on: http://localhost:5000
+2026-07-04 17:44:36.242 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-07-04 17:44:36.242 +05:30 [INF] Hosting environment: Development
+2026-07-04 17:44:36.242 +05:30 [INF] Content root path: C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api
+2026-07-04 17:44:52.697 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-04 17:44:52.778 +05:30 [INF] HTTP GET /api/v1/health responded 200 in 94.2652 ms
+2026-07-04 17:44:52.841 +05:30 [INF] HTTP GET /api/v1/nonexistent responded 404 in 1.2696 ms
