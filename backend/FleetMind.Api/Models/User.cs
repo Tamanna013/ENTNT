@@ -20,6 +20,11 @@ public class User : BaseEntity
     /// BCrypt or similar hash of the user's password. Never stores plaintext.
     /// </summary>
     public string PasswordHash { get; set; } = string.Empty;
+    public UserRole Role { get; set; }
+    
+    // Account Lockout
+    public int FailedLoginAttempts { get; set; } = 0;
+    public DateTime? LockedOutUntil { get; set; }
 
     public string? PhoneNumber { get; set; }
 
@@ -27,6 +32,7 @@ public class User : BaseEntity
     /// Whether the user account is active. Inactive users cannot log in.
     /// </summary>
     public bool IsActive { get; set; } = true;
+    public bool IsEmailVerified { get; set; } = false;
 
     // ─── Navigation Properties ───────────────────────────────────────────────
 

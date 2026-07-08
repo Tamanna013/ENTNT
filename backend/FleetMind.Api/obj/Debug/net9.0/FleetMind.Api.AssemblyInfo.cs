@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FleetMind.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b99062c09190722560e4a95011b8069a10a825ea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+244d41d6d9733723546b782a2c386ac3487ad96d")]
 [assembly: System.Reflection.AssemblyProductAttribute("FleetMind.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FleetMind.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
