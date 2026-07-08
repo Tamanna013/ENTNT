@@ -1,0 +1,210 @@
+# ==============================================================================
+# FleetMind AI - Azure DevOps CI Pipeline
+# ==============================================================================
+# NOTE: The Playwright end-to-end test suite (frontend/e2e/) is DELIBERATELY NOT 
+# run in this CI pipeline, since it requires genuinely running backend and frontend 
+# instances plus a real database - a meaningfully heavier infrastructure dependency 
+# than this build-and-test pipeline is designed for. Running the E2E suite in CI 
+# would require a separate, more elaborate pipeline stage provisioning a real test 
+# database and running both applications as background services before invoking 
+# Playwright - documented as a natural future extension of this pipeline, not 
+# implemented here.
+# ==============================================================================
+
+trigger:
+  branches:
+    include:
+      - main
+      - master
+
+pr:
+  branches:
+    include:
+      - main
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: BackendBuildAndTest
+    dependsOn: []
+    displayName: 'Backend Build & Test'
+    jobs:
+      - job: BuildAndTestBackend
+        displayName: 'Build and Test .NET Backend'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET 9 SDK'
+            inputs:
+              version: '9.0.x'
+
+          - script: dotnet restore backend/FleetMind.Api/FleetMind.Api.csproj
+            displayName: 'Restore API dependencies'
+
+          - script: dotnet restore backend/FleetMind.Api.Tests/FleetMind.Api.Tests.csproj
+            displayName: 'Restore Unit Tests dependencies'
+
+          - script: dotnet restore backend/FleetMind.Api.IntegrationTests/FleetMind.Api.IntegrationTests.csproj
+            displayName: 'Restore Integration Tests dependencies'
+
+          - script: dotnet build backend/FleetMind.Api/FleetMind.Api.csproj --configuration Release --no-restore
+            displayName: 'Build API (Release)'
+
+          # NOTE: The Unit Tests require NO external database service since they mock IUnitOfWork entirely.
+          - script: dotnet test backend/FleetMind.Api.Tests/FleetMind.Api.Tests.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+            displayName: 'Run Backend Unit Tests & Collect Coverage'
+
+          # NOTE: The Integration Tests ALSO require NO external database service, since CustomWebApplicationFactory
+          # uses an EF Core SQLite in-memory provider, a deliberate, favorable design property that meaningfully 
+          # simplifies this CI pipeline compared to an approach requiring a real SQL Server service container.
+          - script: dotnet test backend/FleetMind.Api.IntegrationTests/FleetMind.Api.IntegrationTests.csproj --no-build --configuration Release
+            displayName: 'Run Backend Integration Tests'
+
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish Backend Code Coverage Results'
+            inputs:
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+              failIfCoverageEmpty: true
+
+          - script: |
+              echo "Parsing backend coverage threshold..."
+              COVERAGE_FILE=$(find $(Agent.TempDirectory) -name "coverage.cobertura.xml" | head -n 1)
+              if [ -z "$COVERAGE_FILE" ]; then
+                # Fallback to current directory if not found in TempDirectory
+                COVERAGE_FILE=$(find . -name "coverage.cobertura.xml" | head -n 1)
+                if [ -z "$COVERAGE_FILE" ]; then
+                  echo "Error: Coverage file not found!"
+                  exit 1
+                fi
+              fi
+              echo "Found coverage file: $COVERAGE_FILE"
+              
+              # Parse line-rate attribute from the root <coverage> tag
+              LINE_RATE=$(grep -oP 'line-rate="\K[^"]+' "$COVERAGE_FILE" | head -n 1)
+              echo "Actual Line Rate: $LINE_RATE"
+              
+              # Enforce threshold: 0.01 (1%)
+              RESULT=$(awk -v rate="$LINE_RATE" -v threshold="0.01" 'BEGIN {print (rate >= threshold) ? 1 : 0}')
+              if [ "$RESULT" -eq 1 ]; then
+                echo "Backend coverage ($LINE_RATE) passed threshold (>= 0.01)"
+              else
+                echo "##vso[task.logissue type=error]Backend coverage ($LINE_RATE) failed threshold (>= 0.01). See docs/architecture/test-coverage-policy.md"
+                exit 1
+              fi
+            displayName: 'Enforce Backend Coverage Gate'
+
+  - stage: FrontendBuildAndTest
+    dependsOn: []
+    displayName: 'Frontend Build & Test'
+    jobs:
+      - job: BuildAndTestFrontend
+        displayName: 'Build and Test React Frontend'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js 20'
+            inputs:
+              versionSpec: '20.x'
+
+          - script: npm ci
+            displayName: 'Install Frontend Dependencies'
+            workingDirectory: 'frontend'
+
+          - script: npm run build
+            displayName: 'Build Frontend Production Bundle'
+            workingDirectory: 'frontend'
+
+          - script: npm run test:coverage
+            displayName: 'Run Frontend Tests & Collect Coverage'
+            workingDirectory: 'frontend'
+
+          - script: |
+              echo "Parsing frontend coverage threshold from lcov.info..."
+              COVERAGE_FILE="frontend/coverage/lcov.info"
+              if [ ! -f "$COVERAGE_FILE" ]; then
+                echo "Error: lcov.info not found!"
+                exit 1
+              fi
+              
+              # Sum lines found (LF) and lines hit (LH) across the entire lcov file
+              LH_SUM=$(grep -oP '^LH:\K\d+' "$COVERAGE_FILE" | awk '{sum+=$1} END {print sum}')
+              LF_SUM=$(grep -oP '^LF:\K\d+' "$COVERAGE_FILE" | awk '{sum+=$1} END {print sum}')
+              
+              if [ "$LF_SUM" -eq 0 ]; then
+                echo "Error: No lines found in lcov coverage report."
+                exit 1
+              fi
+              
+              # Calculate percentage
+              COVERAGE=$(awk -v lh="$LH_SUM" -v lf="$LF_SUM" 'BEGIN {print (lh/lf)*100}')
+              echo "Actual Coverage: $COVERAGE%"
+              
+              # Enforce threshold: 70.0%
+              RESULT=$(awk -v cov="$COVERAGE" -v threshold="70.0" 'BEGIN {print (cov >= threshold) ? 1 : 0}')
+              if [ "$RESULT" -eq 1 ]; then
+                echo "Frontend coverage ($COVERAGE%) passed threshold (>= 70.0%)"
+              else
+                echo "##vso[task.logissue type=error]Frontend coverage ($COVERAGE%) failed threshold (>= 70.0%). See docs/architecture/test-coverage-policy.md"
+                exit 1
+              fi
+            displayName: 'Enforce Frontend Coverage Gate'
+
+  - stage: DeployBackend
+    dependsOn: ['BackendBuildAndTest']
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    displayName: 'Deploy Backend to Azure'
+    jobs:
+      - job: DeployBackendJob
+        displayName: 'Publish and Deploy .NET Backend'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET 9 SDK'
+            inputs:
+              version: '9.0.x'
+
+          - script: dotnet publish backend/FleetMind.Api/FleetMind.Api.csproj --configuration Release --output $(Build.ArtifactStagingDirectory)
+            displayName: 'Publish Backend Package'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Backend Artifact'
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+              artifact: 'backend-drop'
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service'
+            inputs:
+              azureSubscription: 'FleetMind-Azure-Connection'
+              appType: 'webAppLinux'
+              appName: 'fleetmind-ai-api'
+              package: '$(Build.ArtifactStagingDirectory)'
+
+  - stage: DeployFrontend
+    dependsOn: ['FrontendBuildAndTest']
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    displayName: 'Deploy Frontend to Azure'
+    jobs:
+      - job: DeployFrontendJob
+        displayName: 'Build and Deploy React Frontend'
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js 20'
+            inputs:
+              versionSpec: '20.x'
+
+          - script: npm ci
+            displayName: 'Install Frontend Dependencies'
+            workingDirectory: 'frontend'
+
+          - script: npm run build
+            displayName: 'Build Frontend Production Bundle'
+            workingDirectory: 'frontend'
+
+          - task: AzureStaticWebApp@0
+            displayName: 'Deploy to Azure Static Web Apps'
+            inputs:
+              app_location: 'frontend'
+              api_location: ''
+              output_location: 'dist'
+            env:
+              azure_static_web_apps_api_token: $(StaticWebAppDeploymentToken)

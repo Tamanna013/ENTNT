@@ -1,0 +1,53 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: fleetmind_sqlserver
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: '${DB_SA_PASSWORD}'
+      MSSQL_PID: 'Developer'
+    ports:
+      - "1433:1433"
+    healthcheck:
+      # Use sqlcmd to test connectivity, ensuring the DB is fully ready before depending services start
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P '${DB_SA_PASSWORD}' -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  backend:
+    build:
+      context: ./backend/FleetMind.Api
+      dockerfile: Dockerfile
+    container_name: fleetmind_backend
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=FleetMindDb;User Id=sa;Password=${DB_SA_PASSWORD};TrustServerCertificate=True;
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Development
+      # Ensure background services or local file storage use correct paths if needed
+      - FileStorage__UploadDirectory=/app/uploads
+    ports:
+      - "8080:8080"
+    volumes:
+      - backend_uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Pass the backend URL exposed via host or directly to the container
+        # Since Vite builds this into the static assets, we map the host-accessible port (8080)
+        - VITE_API_BASE_URL=http://localhost:8080/api/v1
+    container_name: fleetmind_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  backend_uploads:
