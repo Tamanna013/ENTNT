@@ -93,9 +93,9 @@ public class ExceptionHandlingMiddleware
             AppValidationException ex =>
                 ((int)HttpStatusCode.BadRequest, ex.Message),
 
-            UnauthorizedAccessAppException ex =>
-                ((int)HttpStatusCode.Unauthorized, ex.Message),
-
+            UnauthorizedAccessException _ => (StatusCodes.Status401Unauthorized, "Unauthorized access."),
+            UnauthorizedAccessAppException ex => ((int)HttpStatusCode.Unauthorized, ex.Message),
+            RateLimitExceededException _ => (StatusCodes.Status429TooManyRequests, "Rate limit exceeded."),
             ConflictException ex =>
                 ((int)HttpStatusCode.Conflict, ex.Message),
 
