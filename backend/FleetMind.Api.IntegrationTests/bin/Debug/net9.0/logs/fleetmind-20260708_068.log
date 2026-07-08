@@ -1,0 +1,77 @@
+2026-07-08 16:44:22.771 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:44:23.003 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:44:23.003 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:44:23.004 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:44:23.006 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:44:23.005 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:44:23.0049906+05:30"
+2026-07-08 16:44:23.265 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:44:23.273 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:44:23.832 +05:30 [INF] 
+=== MOCK EMAIL ===
+To: newuser@test.com
+Subject: Verify your email address
+Body: Welcome to FleetMind! Please verify your email by clicking the link below:
+
+https://localhost:5173/verify-email?token=rj1xrbAW8J1OQCJ8mMjxZyim51f9Tyamx-2Ooy0Bla8LWLQihDbp3xksDENPRGiHNVciNmpf1rvZmHyw9VlxHA
+===================
+2026-07-08 16:44:23.923 +05:30 [ERR] Unhandled exception [ConflictException] — TraceId: 0HNMSS888V1F9, StatusCode: 409, Message: A user with email 'newuser@test.com' already exists.
+FleetMind.Api.Common.Exceptions.ConflictException: A user with email 'newuser@test.com' already exists.
+   at FleetMind.Api.Services.AuthService.RegisterAsync(RegisterDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\AuthService.cs:line 49
+   at FleetMind.Api.Controllers.AuthController.Register(RegisterDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\AuthController.cs:line 44
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:44:24.389 +05:30 [ERR] Unhandled exception [UnauthorizedAccessAppException] — TraceId: 0HNMSS888V1FF, StatusCode: 401, Message: Invalid or expired refresh token.
+FleetMind.Api.Common.Exceptions.UnauthorizedAccessAppException: Invalid or expired refresh token.
+   at FleetMind.Api.Services.AuthService.RefreshAsync(String presentedRefreshToken) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\AuthService.cs:line 213
+   at FleetMind.Api.Controllers.AuthController.Refresh() in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\AuthController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:44:24.405 +05:30 [ERR] Unhandled exception [UnauthorizedAccessAppException] — TraceId: 0HNMSS888V1FH, StatusCode: 401, Message: Invalid or expired refresh token.
+FleetMind.Api.Common.Exceptions.UnauthorizedAccessAppException: Invalid or expired refresh token.
+   at FleetMind.Api.Services.AuthService.RefreshAsync(String presentedRefreshToken) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\AuthService.cs:line 213
+   at FleetMind.Api.Controllers.AuthController.Refresh() in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\AuthController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:44:24.419 +05:30 [INF] DelayedVoyageCheckService is stopping.

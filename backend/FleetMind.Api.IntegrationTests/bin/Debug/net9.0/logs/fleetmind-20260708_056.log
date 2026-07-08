@@ -1,0 +1,218 @@
+2026-07-08 16:19:09.819 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:19:10.466 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:19:10.495 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:19:10.496 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:19:10.4965808+05:30"
+2026-07-08 16:19:10.497 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:19:10.505 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:19:11.243 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:19:11.246 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:19:12.315 +05:30 [INF] 
+=== MOCK EMAIL ===
+To: newuser@test.com
+Subject: Verify your email address
+Body: Welcome to FleetMind! Please verify your email by clicking the link below:
+
+https://localhost:5173/verify-email?token=HG5hPfDHfzkt95C38zYN1ar1tWepA-kuQ3f2LWfB_TR7wR6LKBtVFC-PGH2lQJR2K33PPFAbP8QR-8kPXrz0kQ
+===================
+2026-07-08 16:19:12.546 +05:30 [ERR] Unhandled exception [ConflictException] — TraceId: 0HNMSRQ5JG71T, StatusCode: 409, Message: A user with email 'newuser@test.com' already exists.
+FleetMind.Api.Common.Exceptions.ConflictException: A user with email 'newuser@test.com' already exists.
+   at FleetMind.Api.Services.AuthService.RegisterAsync(RegisterDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\AuthService.cs:line 49
+   at FleetMind.Api.Controllers.AuthController.Register(RegisterDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\AuthController.cs:line 44
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:19:13.396 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:19:15.736 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:19:15.841 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:19:15.841 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:19:15.841 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:19:15.841 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:19:15.842 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:19:15.8421283+05:30"
+2026-07-08 16:19:15.864 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:19:15.892 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:19:17.013 +05:30 [ERR] Failed executing DbCommand (5ms) [Parameters=[p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+EXEC sp_GetFuelEfficiencyReport @TrailingDays = @p0
+2026-07-08 16:19:17.030 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'FleetMind.Api.Data.FleetMindDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-07-08 16:19:17.036 +05:30 [ERR] Unhandled exception [SqliteException] — TraceId: 0HNMSRQ53AVOU, StatusCode: 500, Message: SQLite Error 1: 'near "EXEC": syntax error'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at FleetMind.Api.Repositories.ReportingRepository.GetFuelEfficiencyReportAsync(Int32 trailingDays) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Repositories\ReportingRepository.cs:line 35
+   at FleetMind.Api.Services.ReportingService.GetFuelEfficiencyReportAsync(Int32 trailingDays) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\ReportingService.cs:line 30
+   at FleetMind.Api.Services.FuelLogService.CreateFuelLogAsync(CreateFuelLogDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\FuelLogService.cs:line 77
+   at FleetMind.Api.Controllers.FuelController.CreateFuelLog(CreateFuelLogDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\FuelController.cs:line 43
+   at lambda_method2057(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:19:17.092 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:19:17.204 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:19:17.454 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:19:17.454 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:19:17.454 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:19:17.454 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:19:17.455 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:19:17.4554345+05:30"
+2026-07-08 16:19:17.513 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:19:17.575 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:19:18.384 +05:30 [ERR] Failed executing DbCommand (4ms) [Parameters=[p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+EXEC sp_GetFuelEfficiencyReport @TrailingDays = @p0
+2026-07-08 16:19:18.394 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'FleetMind.Api.Data.FleetMindDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-07-08 16:19:18.398 +05:30 [ERR] Unhandled exception [SqliteException] — TraceId: 0HNMSRQ5JG72E, StatusCode: 500, Message: SQLite Error 1: 'near "EXEC": syntax error'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'near "EXEC": syntax error'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.FromSqlQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at FleetMind.Api.Repositories.ReportingRepository.GetFuelEfficiencyReportAsync(Int32 trailingDays) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Repositories\ReportingRepository.cs:line 35
+   at FleetMind.Api.Services.ReportingService.GetFuelEfficiencyReportAsync(Int32 trailingDays) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\ReportingService.cs:line 30
+   at FleetMind.Api.Services.FuelLogService.CreateFuelLogAsync(CreateFuelLogDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\FuelLogService.cs:line 77
+   at FleetMind.Api.Controllers.FuelController.CreateFuelLog(CreateFuelLogDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\FuelController.cs:line 43
+   at lambda_method2067(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:19:18.437 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:19:21.056 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:19:21.197 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:19:21.197 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:19:21.197 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:19:21.197 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:19:21.197 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:19:21.1975483+05:30"
+2026-07-08 16:19:21.255 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:19:21.284 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:19:24.219 +05:30 [INF] Successfully warmed up cache for FleetSummary.
+2026-07-08 16:19:24.222 +05:30 [INF] Successfully warmed up cache for ShipUtilizationTrend.
+2026-07-08 16:19:24.223 +05:30 [INF] Successfully warmed up cache for VoyagePerformanceTrend.
+2026-07-08 16:19:24.224 +05:30 [INF] Successfully warmed up cache for CrewComplianceTrend.
+2026-07-08 16:19:24.225 +05:30 [INF] Successfully warmed up cache for MaintenanceCostTrend.
+2026-07-08 16:19:24.227 +05:30 [INF] Successfully warmed up cache for FinancialSummaryTrend.
+2026-07-08 16:19:24.227 +05:30 [INF] AnalyticsCacheWarmupService completed its one-shot run.
+2026-07-08 16:19:25.660 +05:30 [ERR] Unhandled exception [ConflictException] — TraceId: 0HNMSRQ53AVP8, StatusCode: 409, Message: A fleet with this name already exists.
+FleetMind.Api.Common.Exceptions.ConflictException: A fleet with this name already exists.
+   at FleetMind.Api.Services.FleetService.CreateFleetAsync(CreateFleetDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\FleetService.cs:line 69
+   at FleetMind.Api.Controllers.FleetsController.CreateFleet(CreateFleetDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\FleetsController.cs:line 67
+   at lambda_method2104(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:19:25.862 +05:30 [INF] DelayedVoyageCheckService is stopping.

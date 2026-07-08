@@ -1,0 +1,38 @@
+2026-07-08 16:19:22.733 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:19:22.903 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:19:22.903 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:19:22.903 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:19:22.904 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:19:22.905 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:19:22.9052302+05:30"
+2026-07-08 16:19:22.944 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:19:22.984 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:19:25.922 +05:30 [INF] Successfully warmed up cache for FleetSummary.
+2026-07-08 16:19:25.924 +05:30 [INF] Successfully warmed up cache for ShipUtilizationTrend.
+2026-07-08 16:19:25.925 +05:30 [INF] Successfully warmed up cache for VoyagePerformanceTrend.
+2026-07-08 16:19:25.926 +05:30 [INF] Successfully warmed up cache for CrewComplianceTrend.
+2026-07-08 16:19:25.926 +05:30 [INF] Successfully warmed up cache for MaintenanceCostTrend.
+2026-07-08 16:19:25.927 +05:30 [INF] Successfully warmed up cache for FinancialSummaryTrend.
+2026-07-08 16:19:25.927 +05:30 [INF] AnalyticsCacheWarmupService completed its one-shot run.
+2026-07-08 16:19:27.130 +05:30 [ERR] Unhandled exception [ConflictException] — TraceId: 0HNMSRQ5JG72O, StatusCode: 409, Message: A fleet with this name already exists.
+FleetMind.Api.Common.Exceptions.ConflictException: A fleet with this name already exists.
+   at FleetMind.Api.Services.FleetService.CreateFleetAsync(CreateFleetDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\FleetService.cs:line 69
+   at FleetMind.Api.Controllers.FleetsController.CreateFleet(CreateFleetDto dto) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\FleetsController.cs:line 67
+   at lambda_method2114(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:19:27.282 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:20:44.045 +05:30 [WRN] The foreign key property 'UserRole.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.

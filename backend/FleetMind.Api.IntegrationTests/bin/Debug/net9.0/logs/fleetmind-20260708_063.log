@@ -1,0 +1,63 @@
+2026-07-08 16:24:19.158 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:24:19.619 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:24:19.619 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:24:19.620 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:24:19.622 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:24:19.621 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:24:19.6208668+05:30"
+2026-07-08 16:24:20.143 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:24:20.146 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:24:22.416 +05:30 [ERR] Unhandled exception [NotFoundException] — TraceId: 0HNMSRT1LMMU5, StatusCode: 404, Message: Fleet with identifier '71fa16a5-d3c4-42a8-8410-c5fe0b54a783' was not found.
+FleetMind.Api.Common.Exceptions.NotFoundException: Fleet with identifier '71fa16a5-d3c4-42a8-8410-c5fe0b54a783' was not found.
+   at FleetMind.Api.Services.FleetService.GetFleetByIdAsync(Guid id) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Services\FleetService.cs:line 55
+   at FleetMind.Api.Controllers.FleetsController.GetFleetById(Guid id) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Controllers\FleetsController.cs:line 59
+   at lambda_method1931(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at FleetMind.Api.Middleware.SecurityHeadersMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\SecurityHeadersMiddleware.cs:line 48
+   at FleetMind.Api.Middleware.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\Tamanna\Desktop\entnt\fleetmind-ai\backend\FleetMind.Api\Middleware\ExceptionHandlingMiddleware.cs:line 39
+2026-07-08 16:24:22.659 +05:30 [INF] Successfully warmed up cache for FleetSummary.
+2026-07-08 16:24:22.675 +05:30 [INF] Successfully warmed up cache for ShipUtilizationTrend.
+2026-07-08 16:24:22.691 +05:30 [INF] Successfully warmed up cache for VoyagePerformanceTrend.
+2026-07-08 16:24:22.702 +05:30 [INF] Successfully warmed up cache for CrewComplianceTrend.
+2026-07-08 16:24:22.705 +05:30 [INF] Successfully warmed up cache for MaintenanceCostTrend.
+2026-07-08 16:24:22.718 +05:30 [INF] Successfully warmed up cache for FinancialSummaryTrend.
+2026-07-08 16:24:22.718 +05:30 [INF] AnalyticsCacheWarmupService completed its one-shot run.
+2026-07-08 16:24:23.379 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:24:24.261 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:24:24.344 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:24:24.344 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:24:24.344 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:24:24.344 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:24:24.345 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:24:24.3451542+05:30"
+2026-07-08 16:24:24.362 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:24:24.389 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:24:25.861 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:24:30.218 +05:30 [INF] FleetMind AI API starting. Target database: unknown
+2026-07-08 16:24:30.305 +05:30 [INF] DelayedVoyageCheckService is starting.
+2026-07-08 16:24:30.305 +05:30 [INF] ExpiringCertificationCheckService is starting.
+2026-07-08 16:24:30.305 +05:30 [INF] AnalyticsCacheWarmupService starting (one-shot run).
+2026-07-08 16:24:30.305 +05:30 [INF] MaintenanceOverdueCheckService is starting.
+2026-07-08 16:24:30.306 +05:30 [INF] ExpiringCertificationCheckService running at: "2026-07-08T16:24:30.3061548+05:30"
+2026-07-08 16:24:30.352 +05:30 [INF] DelayedVoyageCheckService cycle completed. Transitioned 0 voyages to Delayed.
+2026-07-08 16:24:30.366 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-07-08 16:24:33.311 +05:30 [INF] Successfully warmed up cache for FleetSummary.
+2026-07-08 16:24:33.313 +05:30 [INF] Successfully warmed up cache for ShipUtilizationTrend.
+2026-07-08 16:24:33.313 +05:30 [INF] Successfully warmed up cache for VoyagePerformanceTrend.
+2026-07-08 16:24:33.315 +05:30 [INF] Successfully warmed up cache for CrewComplianceTrend.
+2026-07-08 16:24:33.315 +05:30 [INF] Successfully warmed up cache for MaintenanceCostTrend.
+2026-07-08 16:24:33.316 +05:30 [INF] Successfully warmed up cache for FinancialSummaryTrend.
+2026-07-08 16:24:33.316 +05:30 [INF] AnalyticsCacheWarmupService completed its one-shot run.
+2026-07-08 16:24:41.688 +05:30 [INF] DelayedVoyageCheckService is stopping.
+2026-07-08 16:25:33.852 +05:30 [WRN] The foreign key property 'UserRole.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
