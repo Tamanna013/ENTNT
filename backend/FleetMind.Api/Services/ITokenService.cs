@@ -17,4 +17,14 @@ public interface ITokenService
     /// Returns the absolute UTC expiry time for a newly generated token.
     /// </summary>
     DateTime GetAccessTokenExpiry();
+
+    /// <summary>
+    /// Generates a cryptographically secure random string suitable for a refresh token.
+    /// </summary>
+    string GenerateRefreshToken();
+
+    /// <summary>
+    /// Hashes a token string using SHA-256 for secure storage and comparison.
+    /// </summary>
+    string HashToken(string token);
 }
