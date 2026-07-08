@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using FleetMind.Api.Configuration;
 using FleetMind.Api.Models;
@@ -56,5 +57,27 @@ public class TokenService : ITokenService
     public DateTime GetAccessTokenExpiry()
     {
         return DateTime.UtcNow.AddMinutes(_jwtOptions.AccessTokenExpiryMinutes);
+    }
+
+    public string GenerateRefreshToken()
+    {
+        var randomBytes = new byte[64];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+        
+        // Return a URL-safe base64 encoded string
+        return Convert.ToBase64String(randomBytes)
+            .Replace("+", "-")
+            .Replace("/", "_")
+            .TrimEnd('=');
+    }
+
+    public string HashToken(string token)
+    {
+        using var sha256 = SHA256.Create();
+        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(token));
+        return Convert.ToBase64String(hashedBytes);
     }
 }
