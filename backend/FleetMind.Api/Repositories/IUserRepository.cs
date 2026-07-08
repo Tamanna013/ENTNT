@@ -18,4 +18,9 @@ public interface IUserRepository : IGenericRepository<User>
     /// Checks whether a non-deleted user with the given email already exists.
     /// </summary>
     Task<bool> ExistsByEmailAsync(string email);
+
+    /// <summary>
+    /// Gets a paged list of non-deleted users.
+    /// </summary>
+    Task<(System.Collections.Generic.List<User> items, int totalCount)> GetPagedAsync(DTOs.Common.PaginationQueryDto query);
 }

@@ -15,6 +15,76 @@ public interface IUnitOfWork : IDisposable
     IUserRepository Users { get; }
 
     /// <summary>
+    /// Refresh token specific repository.
+    /// </summary>
+    IRefreshTokenRepository RefreshTokens { get; }
+
+    /// <summary>
+    /// Fleet specific repository.
+    /// </summary>
+    IFleetRepository Fleets { get; }
+
+    /// <summary>
+    /// Ship specific repository.
+    /// </summary>
+    IShipRepository Ships { get; }
+
+    /// <summary>
+    /// Crew member specific repository.
+    /// </summary>
+    ICrewMemberRepository CrewMembers { get; }
+
+    /// <summary>
+    /// Voyage specific repository.
+    /// </summary>
+    IVoyageRepository Voyages { get; }
+
+    /// <summary>
+    /// Cargo specific repository.
+    /// </summary>
+    ICargoRepository Cargo { get; }
+
+    /// <summary>
+    /// Container specific repository.
+    /// </summary>
+    IContainerRepository Containers { get; }
+
+    /// <summary>
+    /// Port specific repository.
+    /// </summary>
+    IPortRepository Ports { get; }
+
+    /// <summary>
+    /// Reporting specific repository.
+    /// </summary>
+    IReportingRepository Reporting { get; }
+    
+    /// <summary>
+    /// Audit log specific repository.
+    /// </summary>
+    IAuditLogRepository AuditLogs { get; }
+
+    /// <summary>
+    /// Maintenance record specific repository.
+    /// </summary>
+    IMaintenanceRecordRepository MaintenanceRecords { get; }
+
+    /// <summary>
+    /// Fuel log specific repository.
+    /// </summary>
+    IFuelLogRepository FuelLogs { get; }
+
+    /// <summary>
+    /// Incident specific repository.
+    /// </summary>
+    IIncidentRepository Incidents { get; }
+
+    /// <summary>
+    /// Document specific repository.
+    /// </summary>
+    IDocumentRepository Documents { get; }
+
+    /// <summary>
     /// Factory method returning a generic repository for any BaseEntity-derived type
     /// that doesn't need custom repository methods.
     /// </summary>

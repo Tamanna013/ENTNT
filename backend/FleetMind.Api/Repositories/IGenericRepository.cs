@@ -25,6 +25,11 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<IReadOnlyList<T>> FindAsync(Expression<Func<T, bool>> predicate);
 
     /// <summary>
+    /// Counts non-deleted entities optionally matching the given predicate.
+    /// </summary>
+    Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null);
+
+    /// <summary>
     /// Adds a new entity to the context (not persisted until SaveChangesAsync is called).
     /// </summary>
     Task AddAsync(T entity);

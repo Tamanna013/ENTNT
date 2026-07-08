@@ -7,7 +7,8 @@ namespace FleetMind.Api.Repositories;
 
 /// <summary>
 /// Generic repository implementation using EF Core.
-/// All read queries use AsNoTracking() for performance and filter out soft-deleted records.
+/// Read-only methods in derived repositories should apply AsNoTracking().
+/// Base methods like GetByIdAsync DO NOT apply AsNoTracking() so entities remain tracked for updates.
 /// </summary>
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
@@ -23,14 +24,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<T?> GetByIdAsync(Guid id)
     {
         return await _dbSet
-            .AsNoTracking()
             .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
     }
 
     public async Task<IReadOnlyList<T>> GetAllAsync()
     {
         return await _dbSet
-            .AsNoTracking()
             .Where(e => !e.IsDeleted)
             .ToListAsync();
     }
@@ -38,10 +37,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<IReadOnlyList<T>> FindAsync(Expression<Func<T, bool>> predicate)
     {
         return await _dbSet
-            .AsNoTracking()
             .Where(e => !e.IsDeleted)
             .Where(predicate)
             .ToListAsync();
+    }
+
+    public async Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null)
+    {
+        var query = _dbSet.Where(e => !e.IsDeleted);
+        if (predicate != null)
+        {
+            query = query.Where(predicate);
+        }
+        return await query.CountAsync();
     }
 
     public async Task AddAsync(T entity)
