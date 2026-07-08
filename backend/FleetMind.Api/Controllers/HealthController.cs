@@ -62,4 +62,36 @@ public class HealthController : ControllerBase
             });
         }
     }
+    /// <summary>
+    /// Readiness check for Azure App Service routing.
+    /// Performs a lightweight database connectivity check to determine if this instance is ready to receive traffic.
+    /// </summary>
+    [HttpGet("ready")]
+    public async Task<IActionResult> GetReadiness()
+    {
+        try
+        {
+            await using var connection = new SqlConnection(_dbOptions.DefaultConnection);
+            // Wait max 3 seconds for readiness check
+            connection.ConnectionString = new SqlConnectionStringBuilder(_dbOptions.DefaultConnection) 
+            { 
+                ConnectTimeout = 3 
+            }.ConnectionString;
+
+            await connection.OpenAsync();
+
+            return Ok(new
+            {
+                status = "ready"
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(503, new
+            {
+                status = "not ready",
+                reason = "database unavailable"
+            });
+        }
+    }
 }
