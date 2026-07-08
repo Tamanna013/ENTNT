@@ -4,16 +4,19 @@ using FleetMind.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FleetMind.Api.Migrations
+namespace FleetMind.Api.Data.Migrations
 {
     [DbContext(typeof(FleetMindDbContext))]
-    partial class FleetMindDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260705125241_AddNotificationEntity")]
+    partial class AddNotificationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,108 +118,6 @@ namespace FleetMind.Api.Migrations
                     b.ToView(null, (string)null);
                 });
 
-            modelBuilder.Entity("FleetMind.Api.Models.AiChatMessage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ConversationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConversationId");
-
-                    b.ToTable("AiChatMessages");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.AiConversation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AiConversations");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.AiUsageLog", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FeatureContext")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("TokensUsed")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("WasSuccessful")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId", "Timestamp");
-
-                    b.ToTable("AiUsageLogs");
-                });
-
             modelBuilder.Entity("FleetMind.Api.Models.Attachment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -312,10 +213,6 @@ namespace FleetMind.Api.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EntityName");
-
-                    b.HasIndex("Timestamp");
 
                     b.ToTable("AuditLogs");
                 });
@@ -599,93 +496,6 @@ namespace FleetMind.Api.Migrations
                     b.ToTable("CrewMembers");
                 });
 
-            modelBuilder.Entity("FleetMind.Api.Models.Document", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CurrentVersionNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<Guid?>("EntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("EntityName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.DocumentVersion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AttachmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChangeNotes")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("DocumentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UploadedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("VersionNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttachmentId");
-
-                    b.HasIndex("UploadedByUserId");
-
-                    b.HasIndex("DocumentId", "VersionNumber")
-                        .IsUnique();
-
-                    b.ToTable("DocumentVersions");
-                });
-
             modelBuilder.Entity("FleetMind.Api.Models.EmailVerificationToken", b =>
                 {
                     b.Property<Guid>("Id")
@@ -814,75 +624,6 @@ namespace FleetMind.Api.Migrations
                     b.HasIndex("ShipId", "RecordedDate");
 
                     b.ToTable("FuelLogs");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.Incident", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("OccurredAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ReportedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ResolutionNotes")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<DateTime?>("ResolvedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Severity")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<Guid>("ShipId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasDefaultValue("Reported");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("VoyageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReportedByUserId");
-
-                    b.HasIndex("ShipId");
-
-                    b.HasIndex("VoyageId");
-
-                    b.HasIndex("Severity", "Status");
-
-                    b.ToTable("Incidents");
                 });
 
             modelBuilder.Entity("FleetMind.Api.Models.MaintenanceRecord", b =>
@@ -1234,9 +975,6 @@ namespace FleetMind.Api.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("FailedLoginAttempts")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -1259,9 +997,6 @@ namespace FleetMind.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("LockedOutUntil")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -1290,53 +1025,11 @@ namespace FleetMind.Api.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId1")
-                        .IsUnique()
-                        .HasFilter("[UserId1] IS NOT NULL");
-
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.UserSettings", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NotificationPreferencesJson")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Theme")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("UserSettings");
                 });
 
             modelBuilder.Entity("FleetMind.Api.Models.Voyage", b =>
@@ -1400,39 +1093,6 @@ namespace FleetMind.Api.Migrations
                     b.HasIndex("ShipId", "DepartureDate");
 
                     b.ToTable("Voyages");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.AiChatMessage", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.AiConversation", "Conversation")
-                        .WithMany("Messages")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conversation");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.AiConversation", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.AiUsageLog", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FleetMind.Api.Models.Cargo", b =>
@@ -1519,33 +1179,6 @@ namespace FleetMind.Api.Migrations
                     b.Navigation("Ship");
                 });
 
-            modelBuilder.Entity("FleetMind.Api.Models.DocumentVersion", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.Attachment", "Attachment")
-                        .WithMany()
-                        .HasForeignKey("AttachmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FleetMind.Api.Models.Document", "Document")
-                        .WithMany("Versions")
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FleetMind.Api.Models.User", "UploadedByUser")
-                        .WithMany()
-                        .HasForeignKey("UploadedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Attachment");
-
-                    b.Navigation("Document");
-
-                    b.Navigation("UploadedByUser");
-                });
-
             modelBuilder.Entity("FleetMind.Api.Models.EmailVerificationToken", b =>
                 {
                     b.HasOne("FleetMind.Api.Models.User", "User")
@@ -1580,32 +1213,6 @@ namespace FleetMind.Api.Migrations
                         .WithMany("FuelLogs")
                         .HasForeignKey("VoyageId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Ship");
-
-                    b.Navigation("Voyage");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.Incident", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.User", "ReportedByUser")
-                        .WithMany()
-                        .HasForeignKey("ReportedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FleetMind.Api.Models.Ship", "Ship")
-                        .WithMany("Incidents")
-                        .HasForeignKey("ShipId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("FleetMind.Api.Models.Voyage", "Voyage")
-                        .WithMany("Incidents")
-                        .HasForeignKey("VoyageId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("ReportedByUser");
 
                     b.Navigation("Ship");
 
@@ -1688,22 +1295,7 @@ namespace FleetMind.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FleetMind.Api.Models.User", null)
-                        .WithOne("Role")
-                        .HasForeignKey("FleetMind.Api.Models.UserRole", "UserId1");
-
                     b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.UserSettings", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.User", "User")
-                        .WithOne()
-                        .HasForeignKey("FleetMind.Api.Models.UserSettings", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -1735,11 +1327,6 @@ namespace FleetMind.Api.Migrations
                     b.Navigation("Ship");
                 });
 
-            modelBuilder.Entity("FleetMind.Api.Models.AiConversation", b =>
-                {
-                    b.Navigation("Messages");
-                });
-
             modelBuilder.Entity("FleetMind.Api.Models.Container", b =>
                 {
                     b.Navigation("ContainerCargoItems");
@@ -1750,11 +1337,6 @@ namespace FleetMind.Api.Migrations
             modelBuilder.Entity("FleetMind.Api.Models.CrewMember", b =>
                 {
                     b.Navigation("Certifications");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.Document", b =>
-                {
-                    b.Navigation("Versions");
                 });
 
             modelBuilder.Entity("FleetMind.Api.Models.Fleet", b =>
@@ -1773,8 +1355,6 @@ namespace FleetMind.Api.Migrations
 
                     b.Navigation("FuelLogs");
 
-                    b.Navigation("Incidents");
-
                     b.Navigation("MaintenanceRecords");
 
                     b.Navigation("Voyages");
@@ -1782,9 +1362,6 @@ namespace FleetMind.Api.Migrations
 
             modelBuilder.Entity("FleetMind.Api.Models.User", b =>
                 {
-                    b.Navigation("Role")
-                        .IsRequired();
-
                     b.Navigation("UserRoles");
                 });
 
@@ -1795,8 +1372,6 @@ namespace FleetMind.Api.Migrations
                     b.Navigation("Containers");
 
                     b.Navigation("FuelLogs");
-
-                    b.Navigation("Incidents");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using FleetMind.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetMind.Api.Migrations
 {
     [DbContext(typeof(FleetMindDbContext))]
-    partial class FleetMindDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260706110918_AddAiAssistant")]
+    partial class AddAiAssistant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1234,9 +1237,6 @@ namespace FleetMind.Api.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("FailedLoginAttempts")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -1259,9 +1259,6 @@ namespace FleetMind.Api.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("LockedOutUntil")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -1290,53 +1287,11 @@ namespace FleetMind.Api.Migrations
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId1")
-                        .IsUnique()
-                        .HasFilter("[UserId1] IS NOT NULL");
-
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.UserSettings", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NotificationPreferencesJson")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Theme")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("UserSettings");
                 });
 
             modelBuilder.Entity("FleetMind.Api.Models.Voyage", b =>
@@ -1688,22 +1643,7 @@ namespace FleetMind.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FleetMind.Api.Models.User", null)
-                        .WithOne("Role")
-                        .HasForeignKey("FleetMind.Api.Models.UserRole", "UserId1");
-
                     b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("FleetMind.Api.Models.UserSettings", b =>
-                {
-                    b.HasOne("FleetMind.Api.Models.User", "User")
-                        .WithOne()
-                        .HasForeignKey("FleetMind.Api.Models.UserSettings", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -1782,9 +1722,6 @@ namespace FleetMind.Api.Migrations
 
             modelBuilder.Entity("FleetMind.Api.Models.User", b =>
                 {
-                    b.Navigation("Role")
-                        .IsRequired();
-
                     b.Navigation("UserRoles");
                 });
 
