@@ -1,0 +1,1 @@
+var e={Scheduled:[`InTransit`,`Cancelled`,`Delayed`],Delayed:[`InTransit`,`Cancelled`],InTransit:[`Completed`,`Delayed`],Completed:[],Cancelled:[]};function t(t){return e[t]||[]}function n(e){return e===`Completed`||e===`Cancelled`}export{n,t};

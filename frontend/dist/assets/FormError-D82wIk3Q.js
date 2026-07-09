@@ -1,0 +1,1 @@
+import{n as e,t}from"./jsx-runtime-n5LQ9ujS.js";e();var n=t(),r=({message:e,id:t})=>e?(0,n.jsx)(`div`,{id:t,className:`mb-4 p-3 rounded-md bg-red-900/50 border border-red-500/50 text-red-200 text-sm`,role:`alert`,children:e}):null;export{r as t};
